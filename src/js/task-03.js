@@ -15,16 +15,13 @@ const images = [
 
 const list = document.querySelector(".gallery");
 
-const markup = images
-  .map(
-    (image) =>
+const markup = images.map((image) =>
       `<li><img src="${image.url}" alt="${image.alt}" width="360"/></li>`
-  )
-  .join("");
+  ).join("");
 
 // const markup = [];
-// images.forEach((element) =>
-//   markup.push(`<li><img src="${element.url}" alt="${element.alt}" /></li>`)
+// images.forEach((image) =>
+//   markup.push(`<li><img src="${image.url}" alt="${image.alt}" /></li>`)
 // );
 
 list.insertAdjacentHTML("beforeend", markup);
