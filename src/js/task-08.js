@@ -1,47 +1,70 @@
-// Alert z upomnieniem
-const bodyDiv = document.querySelector("body");
-const alertConteiner = `<div class="alert__background"><div class="alert__div"><p>Please fill in all the fields!</p><button class="alert__btn" type="button">OK</button></div></div>`;
-bodyDiv.innerHTML += alertConteiner;
-bodyDiv.style.position = "relative";
+(() => {
+  // Alert
+  const bodyDiv = document.querySelector("body");
+  // --alert in html
+  const alertHtml = `<div class="alert__background"><div class="alert__div"><p>Please fill in all the fields!</p><button class="alert__btn" type="button">OK</button></div></div>`;
+  addAlertInParent(alertHtml, bodyDiv);
+  // --alert css styles
+  relativeStyle(bodyDiv);
+  const alertBgd = document.querySelector(".alert__background");
+  backgroundStyle(alertBgd);
+  const alertDiv = document.querySelector(".alert__div");
+  alertStyle(alertDiv);
+  // --is alert read?
+  const alertBtn = document.querySelector(".alert__btn");
+  alertBtn.addEventListener("click", (event) => {
+    alertBgd.style.display = "none";
+  });
 
-const alertBgd = document.querySelector(".alert__background");
-alertBgd.style.position = "fixed";
-alertBgd.style.top = "0";
-alertBgd.style.left = "0";
-alertBgd.style.width = "100vw";
-alertBgd.style.height = "100vh";
-alertBgd.style.display = "none";
-alertBgd.style.justifyContent = "center";
-alertBgd.style.alignItems = "center";
+  // Sending form
+  const loginData = document.querySelector(".login-form");
+  const user = {};
+  loginData.addEventListener("submit", submitForm);
 
-const alertDiv = document.querySelector(".alert__div");
-alertDiv.style.margin = "auto";
-alertDiv.style.padding = "10px";
-alertDiv.style.backgroundColor = "red";
-alertDiv.style.color = "white";
-alertDiv.style.textAlign = "center";
+  function submitForm(event) {
+    event.preventDefault();
 
-// Potwierdzenie odczytania alertu
-const alertBtn = document.querySelector(".alert__btn");
-alertBtn.addEventListener("click", (event) => {
-  alertBgd.style.display = "none";
-});
+    const {
+      elements: { email, password },
+    } = event.currentTarget;
 
-// Przesłanie formularza
-const frm = document.querySelector(".login-form");
-frm.addEventListener("submit", submitForm);
+    if (email.value === "" || password.value === "") {
+      return (alertBgd.style.display = "flex");
+    }
 
-function submitForm(event) {
-  event.preventDefault();
+    user[email.name] = email.value;
+    user[password.name] = password.value;
 
-  const {
-    elements: { email, password },
-  } = event.currentTarget;
+    console.log(user);
 
-  if (email.value === "" || password.value === "") {
-    return (alertBgd.style.display = "flex");
+    event.currentTarget.reset();
   }
 
-  console.log(`Login: ${email.value}, Password: ${password.value}`);
-  event.currentTarget.reset();
-}
+  // Functions for alert
+  function addAlertInParent(alert, parent) {
+    parent.innerHTML += alert;
+  }
+
+  function relativeStyle(element) {
+    element.style.position = "relative";
+  }
+
+  function backgroundStyle(element) {
+    element.style.position = "fixed";
+    element.style.top = "0";
+    element.style.left = "0";
+    element.style.width = "100vw";
+    element.style.height = "100vh";
+    element.style.display = "none";
+    element.style.justifyContent = "center";
+    element.style.alignItems = "center";
+  }
+
+  function alertStyle(element) {
+    element.style.margin = "auto";
+    element.style.padding = "10px";
+    element.style.backgroundColor = "red";
+    element.style.color = "white";
+    element.style.textAlign = "center";
+  }
+})();
