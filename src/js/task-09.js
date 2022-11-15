@@ -23,12 +23,13 @@
   }
 
   const btnColor = document.querySelector(".change-color");
-  const spanColor = document.querySelector(".color");
+  const spanColor = document.querySelectorAll("p");
+  const bodyColor = document.querySelector("body");
 
   btnColor.addEventListener("click", () => {
     const hexColor = getRandomHexColor();
     spanColor.style.color = textColor(hexColor);
     spanColor.textContent = `${hexColor}`;
-    spanColor.style.backgroundColor = hexColor;
+    bodyColor.style.backgroundColor = hexColor;
   });
 })();
