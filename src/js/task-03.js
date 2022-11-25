@@ -44,5 +44,5 @@
   
   const liElement = document.querySelectorAll('li');
   
-  liElement.style.border = "2px solid red";
+  liElement.forEach(li => li.style.border = "2px solid red");
 })();
