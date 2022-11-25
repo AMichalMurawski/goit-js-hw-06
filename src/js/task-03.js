@@ -41,4 +41,8 @@
   const imageList = addImageList(images);
   const htmlList = addListToHtml(imageList, listElement);
   const newStyleList = listStyle(listElement);
+  
+  const liElement = document.querySelectorAll('li');
+  
+  liElement.style.border = "2px solid red";
 })();
